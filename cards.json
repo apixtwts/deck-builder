@@ -1,5 +1,4 @@
 [
   { "id": "ali_baba", "name": "Ali Baba", "rarity": "legendary", "img": "cards/ali_baba.png" },
   { "id": "defense_matrix", "name": "Defense Matrix", "rarity": "regular",   "img": "cards/defense_matrix.png" }
-  // …repeat for all cards
 ]
