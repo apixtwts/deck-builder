@@ -1,8 +1,15 @@
 // 5-1  Load cards.json and render pool
 fetch('cards.json')
-  .then(r => r.json())
-  .then(cards => init(cards));
-
+  .then(r => {
+    if (!r.ok) throw new Error('cards.json not found');
+    return r.json();
+  })
+  .then(cards => init(cards))
+  .catch(err => {
+    document.body.insertAdjacentHTML('beforeend',
+      `<p style="color:red">⚠️ ${err.message}</p>`);
+    console.error(err);
+  });
 function init(cards) {
   const poolEl  = document.getElementById('pool');
   const deckEl  = document.getElementById('deck');
