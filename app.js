@@ -1,4 +1,4 @@
-// 5-1  Load cards.json and render pool
+// ------------- load card metadata ----------------
 fetch('cards.json')
   .then(r => {
     if (!r.ok) throw new Error('cards.json not found');
@@ -6,10 +6,14 @@ fetch('cards.json')
   })
   .then(cards => init(cards))
   .catch(err => {
-    document.body.insertAdjacentHTML('beforeend',
-      `<p style="color:red">⚠️ ${err.message}</p>`);
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      `<p style="color:red">⚠️ ${err.message}</p>`
+    );
     console.error(err);
   });
+
+// ------------- main ------------------------------
 function init(cards) {
   const poolEl  = document.getElementById('pool');
   const deckEl  = document.getElementById('deck');
@@ -17,67 +21,68 @@ function init(cards) {
 
   const deck = { regular: [], legendary: null };
 
-  // --- render pool cards
+  // render pool
   cards.forEach(card => {
-    const el = document.createElement('div');
-    el.className = `card ${card.rarity}`;
-    el.innerHTML = `<img src="${card.img}" alt="${card.name}">`;
+    const el = createCardEl(card);
     el.addEventListener('click', () => addToDeck(card));
     poolEl.appendChild(el);
   });
 
-  function addToDeck(card) {
-  // ---  💡 NEW  duplicate-check  ---
-  if (deck.legendary?.id === card.id || deck.regular.some(c => c.id === card.id)) {
-    alert('That card is already in your deck!');
-    return;
+  // ---------- helper: create DOM node ------------
+  function createCardEl(card) {
+    const el = document.createElement('div');
+    el.className = `card ${card.rarity}`;
+    el.innerHTML = `<img src="${card.img}" alt="${card.name}">`;
+    return el;
   }
-  // ---------------------------------
 
-  if (card.rarity === 'legendary') {
-    if (deck.legendary) return alert('You already have a legendary!');
-    deck.legendary = card;
-  } else {
-    if (deck.regular.length >= 12) return alert('Maximum 12 regular cards');
-    deck.regular.push(card);
-  }
-  redrawDeck();
-}
-  {
+  // ---------- add card with rules + duplicate check ----------
+  function addToDeck(card) {
+    // no duplicates allowed
     if (card.rarity === 'legendary') {
+      if (deck.legendary && deck.legendary.id === card.id) {
+        return alert('Legendary already in deck');
+      }
       if (deck.legendary) return alert('You already have a legendary!');
       deck.legendary = card;
     } else {
       if (deck.regular.length >= 12) return alert('Maximum 12 regular cards');
+      if (deck.regular.some(c => c.id === card.id)) {
+        return alert('That card is already in your deck');
+      }
       deck.regular.push(card);
     }
     redrawDeck();
   }
 
+  // ---------- remove by clicking in deck ----------
   function removeFromDeck(idx, type) {
     if (type === 'legendary') deck.legendary = null;
     else deck.regular.splice(idx, 1);
     redrawDeck();
   }
 
+  // ---------- refresh deck panel ----------
   function redrawDeck() {
-    deckEl.innerHTML = '';       // clear grid
+    deckEl.innerHTML = '';
+
+    // show legendary first (if any)
     if (deck.legendary) {
-      addCardEl(deck.legendary, 'legendary', 0);
+      const legEl = createCardEl(deck.legendary);
+      legEl.addEventListener('click', () => removeFromDeck(0, 'legendary'));
+      deckEl.appendChild(legEl);
     }
-    deck.regular.forEach((c, i) => addCardEl(c, 'regular', i));
+
+    deck.regular.forEach((card, i) => {
+      const regEl = createCardEl(card);
+      regEl.addEventListener('click', () => removeFromDeck(i, 'regular'));
+      deckEl.appendChild(regEl);
+    });
+
     countEl.textContent = deck.regular.length + (deck.legendary ? 1 : 0);
   }
 
-  function addCardEl(card, type, index) {
-    const el = document.createElement('div');
-    el.className = `card ${card.rarity}`;
-    el.innerHTML = `<img src="${card.img}" alt="${card.name}">`;
-    el.addEventListener('click', () => removeFromDeck(index, type));
-    deckEl.appendChild(el);
-  }
-
-  // --- export deck as PNG
+  // ---------- export deck as PNG ----------
   document.getElementById('export').onclick = () => {
     html2canvas(deckEl).then(canvas => {
       const link = document.createElement('a');

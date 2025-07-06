@@ -1,37 +1,38 @@
-/* ───────────────────────────────────────────────
+/* ─────────────────────────────────────────────
    1.  Global variables
-   ─────────────────────────────────────────────── */
+   ───────────────────────────────────────────── */
 :root {
-  --pool-card-size: 160px;   /* big thumbnails on the left */
-  --deck-card-size: 105px;   /* mini thumbnails on the right (3×4 grid) */
+  --pool-card-size: 160px;   /* large thumbnails on the left */
+  --deck-card-size: 135px;   /* bigger mini-cards on the right */
+  --gap: 0.6rem;
 }
 
-/* ───────────────────────────────────────────────
-   2.  Base layout
-   ─────────────────────────────────────────────── */
 body {
   font-family: sans-serif;
   margin: 1rem;
 }
 
+/* ─────────────────────────────────────────────
+   2.  Two-column layout
+   ───────────────────────────────────────────── */
 .layout {
   display: flex;
-  gap: 1rem;
+  gap: var(--gap);
 }
 
-/* LEFT column ▸ card pool */
+/* LEFT ▸ card pool -------------------------------------------------------- */
 .pool {
   flex: 1;
   height: calc(100vh - 4rem);
   overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--pool-card-size));
-  gap: 0.5rem;
+  gap: var(--gap);
 }
 
-/* RIGHT column ▸ deck panel */
+/* RIGHT ▸ deck panel ------------------------------------------------------ */
 #deckPanel {
-  width: calc(var(--deck-card-size) * 3 + 1rem); /* 3 cards + gaps */
+  width: calc(var(--deck-card-size) * 3 + var(--gap) * 2); /* 3 columns + gaps */
   max-height: 100vh;
   position: sticky;
   top: 0;
@@ -41,21 +42,18 @@ body {
   overflow-y: auto;
 }
 
-/* ── right-hand deck: 3 × 4 mini grid, no overlap ───────── */
+#deckPanel h2 { margin: 0 0 0.5rem 0; }
+
+/* deck grid: legendary sits first, regulars fill the rest ----------------- */
 .deck-grid {
-  display: flex;                 /* flex instead of grid */
-  flex-wrap: wrap;               /* wrap into multiple rows */
-  gap: 0.5rem;                   /* same spacing as before */
-  max-width: calc(var(--deck-card-size) * 3 + 1rem);  /* 3 columns */
+  display: grid;
+  grid-template-columns: repeat(3, var(--deck-card-size));
+  gap: var(--gap);
 }
 
-#deckPanel .card {
-  width: var(--deck-card-size);  /* mini width */
-}
-
-/* ───────────────────────────────────────────────
-   4.  Card tile styling
-   ─────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   3.  Card tiles
+   ───────────────────────────────────────────── */
 .card {
   cursor: pointer;
   border: 2px solid transparent;
@@ -68,16 +66,15 @@ body {
 
 .card img { width: 100%; display: block; }
 
-/* hover / legendary visuals */
-.card.regular:hover        { border-color: #00e;            transform: scale(1.05); }
-.card.legendary            { box-shadow: 0 0 8px #e0a300; }
-.card.legendary:hover      { border-color: #e0a300;         transform: scale(1.05); }
+.card.regular:hover   { border-color: #00e;       transform: scale(1.05); }
+.card.legendary       { box-shadow: 0 0 8px #e0a300; }
+.card.legendary:hover { border-color: #e0a300;    transform: scale(1.05); }
 
-/* ───────────────────────────────────────────────
-   5.  Export button
-   ─────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   4.  Export button
+   ───────────────────────────────────────────── */
 #export {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
 }
