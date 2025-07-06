@@ -1,64 +1,81 @@
-body { font-family: sans-serif; margin: 1rem; }
-/* --- put this near the top of style.css --- */
+/* ───────────────────────────────
+   1. Global settings & variables
+   ─────────────────────────────── */
 :root {
-  --card-size: 180px;   /* ← change this one number any time */
+  --card-size: 160px;        /* change once, affects both columns */
 }
 
-/* pool list + deck grid */
-#pool,
-.deck-grid {
-  display: grid;
-  gap: 0.75rem;
-  /* every column = exactly var(--card-size) wide */
-  grid-template-columns: repeat(auto-fill, var(--card-size));
+body {
+  font-family: sans-serif;
+  margin: 1rem;
 }
 
-/* the clickable tile */
-.card {
-  width: var(--card-size);
-}
-.card {
-  cursor: pointer;
-  border: 2px solid transparent;
-  border-radius: 6px;
-}
-.card img { width: 100%; display: block; }
-.card.regular:hover   { border-color: #00e; }   /* blue outline on hover   */
-.card.legendary:hover { border-color: #e0a300; } /* gold outline on hover  */
-
-/* Give legendary cards a gold frame so users can tell them apart */
-.card.legendary { box-shadow: 0 0 10px #e0a300; }
-/* ---- NEW LAYOUT ---- */
+/* ───────────────────────────────
+   2. Column layout
+   ─────────────────────────────── */
 .layout {
   display: flex;
-  gap: 1rem;              /* space between columns */
+  gap: 1rem;
 }
 
-/* left column: card pool */
+/* LEFT column ▸ card pool */
 .pool {
-  flex: 1;                /* take the remaining width */
-  height: calc(100vh - 4rem); /* full viewport minus headline */
-  overflow-y: auto;       /* independent scroll bar */
-}
-
-/* right column: the deck */
-#deckPanel {
-  width: 260px;           /* ≈ card width + padding */
-  max-height: 100vh;
-  position: sticky;       /* stay visible while page scrolls */
-  top: 0;                 /* stick to top of viewport */
-  padding: 0.5rem;
-  background: #fff;
-  border-left: 1px solid #ccc;
-  overflow-y: auto;       /* deck gets its own scrollbar if too long */
-}
-
-/* ↓ keep earlier grid rules, but you can paste them here for clarity ↓ */
-.deck-grid {
+  flex: 1;                                   /* take remaining width */
+  height: calc(100vh - 4rem);                /* full viewport minus headline */
+  overflow-y: auto;                          /* independent scrollbar */
   display: grid;
-  grid-template-columns: repeat(auto-fill, var(--card-size, 160px));
+  grid-template-columns: repeat(auto-fill, var(--card-size));
   gap: 0.5rem;
 }
 
-/* optional little polish */
+/* RIGHT column ▸ deck panel */
+#deckPanel {
+  width: calc(var(--card-size) + 20px);      /* card width + padding */
+  max-height: 100vh;
+  position: sticky;                          /* stays in view while scrolling */
+  top: 0;
+  padding: 0.5rem;
+  background: #fff;
+  border-left: 1px solid #ccc;
+  overflow-y: auto;                          /* own scrollbar if deck is long */
+}
+
 #deckPanel h2 { margin-top: 0; }
+
+/* ───────────────────────────────
+   3. Grids
+   ─────────────────────────────── */
+.deck-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--card-size));
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ───────────────────────────────
+   4. Card tile styling
+   ─────────────────────────────── */
+.card {
+  width: var(--card-size);
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: transform 0.15s ease-in-out;
+}
+
+.card img {
+  width: 100%;
+  display: block;
+}
+
+.card.regular:hover   { border-color: #00e;       transform: scale(1.05); }
+.card.legendary       { box-shadow: 0 0 10px #e0a300; }
+.card.legendary:hover { border-color: #e0a300;    transform: scale(1.05); }
+
+/* ───────────────────────────────
+   5. Button
+   ─────────────────────────────── */
+#export {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}

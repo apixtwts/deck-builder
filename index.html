@@ -2,24 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Project O Deck Builder</title>
+  <title>Chip & Burn – Deck Builder</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <h1>Deck Builder</h1>
 
-<div class="layout">
-  <!-- LEFT: scrollable card pool  -->
-  <section id="pool" class="pool"></section>
+  <!-- ── two-column layout ── -->
+  <div class="layout">
 
-  <!-- RIGHT: sticky deck panel -->
-  <aside id="deckPanel">
-    <h2>Your deck (<span id="count">0</span>/13)</h2>
-    <section id="deck" class="deck-grid"></section>
+    <!-- LEFT ▸ scrollable card pool -->
+    <section id="pool" class="pool"></section>
 
-    <button id="export">Save deck as picture</button>
-  </aside>
-</div>
+    <!-- RIGHT ▸ sticky deck panel -->
+    <aside id="deckPanel">
+      <h2>Your deck (<span id="count">0</span>/13)</h2>
+      <section id="deck" class="deck-grid"></section>
+
+      <button id="export">Save deck as picture</button>
+    </aside>
+
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="app.js"></script>
 </body>
