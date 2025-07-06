@@ -66,13 +66,14 @@ function init(cards) {
   function redrawDeck() {
     deckEl.innerHTML = '';
 
-    // show legendary first (if any)
+    // legendary first row
     if (deck.legendary) {
       const legEl = createCardEl(deck.legendary);
       legEl.addEventListener('click', () => removeFromDeck(0, 'legendary'));
       deckEl.appendChild(legEl);
     }
 
+    // regular cards fill after legendary
     deck.regular.forEach((card, i) => {
       const regEl = createCardEl(card);
       regEl.addEventListener('click', () => removeFromDeck(i, 'regular'));
