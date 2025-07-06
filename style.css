@@ -1,0 +1,17 @@
+body { font-family: sans-serif; margin: 1rem; }
+#pool, .deck-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: .5rem;
+}
+.card {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+}
+.card img { width: 100%; display: block; }
+.card.regular:hover   { border-color: #00e; }   /* blue outline on hover   */
+.card.legendary:hover { border-color: #e0a300; } /* gold outline on hover  */
+
+/* Give legendary cards a gold frame so users can tell them apart */
+.card.legendary { box-shadow: 0 0 10px #e0a300; }
