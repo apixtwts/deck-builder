@@ -1,6 +1,6 @@
 [
   { "id": "ali_baba", "name": "Ali Baba", "rarity": "legendary", "img": "cards/ali_baba.png" },
-  { "id": "defense_matrix", "name": "Defense Matrix", "rarity": "regular",   "img": "cards/defense_matrix.png" }
+  { "id": "defense_matrix", "name": "Defense Matrix", "rarity": "regular",   "img": "cards/defense_matrix.png" },
   { "id": "searing_light",               "name": "Searing Light",               "rarity": "regular", "img": "cards/searing_light.png" },
   { "id": "freeze",                      "name": "Freeze",                      "rarity": "regular", "img": "cards/freeze.png" },
   { "id": "friar_tuck",                  "name": "Friar Tuck",                  "rarity": "regular", "img": "cards/friar_tuck.png" },
