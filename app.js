@@ -27,6 +27,23 @@ function init(cards) {
   });
 
   function addToDeck(card) {
+  // ---  💡 NEW  duplicate-check  ---
+  if (deck.legendary?.id === card.id || deck.regular.some(c => c.id === card.id)) {
+    alert('That card is already in your deck!');
+    return;
+  }
+  // ---------------------------------
+
+  if (card.rarity === 'legendary') {
+    if (deck.legendary) return alert('You already have a legendary!');
+    deck.legendary = card;
+  } else {
+    if (deck.regular.length >= 12) return alert('Maximum 12 regular cards');
+    deck.regular.push(card);
+  }
+  redrawDeck();
+}
+  {
     if (card.rarity === 'legendary') {
       if (deck.legendary) return alert('You already have a legendary!');
       deck.legendary = card;

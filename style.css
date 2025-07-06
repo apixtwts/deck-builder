@@ -41,18 +41,16 @@ body {
   overflow-y: auto;
 }
 
-#deckPanel h2 { margin: 0 0 0.5rem 0; }
-
-/* ───────────────────────────────────────────────
-   3.  Grids
-   ─────────────────────────────────────────────── */
-.pool,
-.deck-grid { gap: 0.5rem; }
-
+/* ── right-hand deck: 3 × 4 mini grid, no overlap ───────── */
 .deck-grid {
-  display: grid;
-  grid-template-columns: repeat(3, var(--deck-card-size)); /* 3 × 4 */
-  grid-auto-rows: var(--deck-card-size);
+  display: flex;                 /* flex instead of grid */
+  flex-wrap: wrap;               /* wrap into multiple rows */
+  gap: 0.5rem;                   /* same spacing as before */
+  max-width: calc(var(--deck-card-size) * 3 + 1rem);  /* 3 columns */
+}
+
+#deckPanel .card {
+  width: var(--deck-card-size);  /* mini width */
 }
 
 /* ───────────────────────────────────────────────
