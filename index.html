@@ -8,15 +8,18 @@
 <body>
   <h1>Deck Builder</h1>
 
-  <!-- Card pool -->
-  <section id="pool"></section>
+<div class="layout">
+  <!-- LEFT: scrollable card pool  -->
+  <section id="pool" class="pool"></section>
 
-  <!-- Your deck -->
-  <h2>Your deck (<span id="count">0</span>/13)</h2>
-  <section id="deck" class="deck-grid"></section>
+  <!-- RIGHT: sticky deck panel -->
+  <aside id="deckPanel">
+    <h2>Your deck (<span id="count">0</span>/13)</h2>
+    <section id="deck" class="deck-grid"></section>
 
-  <button id="export">Save deck as picture</button>
-
+    <button id="export">Save deck as picture</button>
+  </aside>
+</div>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="app.js"></script>
 </body>
