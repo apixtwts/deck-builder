@@ -110,7 +110,7 @@
   { "id": "legion_of_the_dead",          "name": "Legion of the Dead",          "rarity": "legendary", "img": "cards/legion_of_the_dead.png" },
   { "id": "moriarty",                    "name": "Moriarty",                    "rarity": "regular", "img": "cards/moriarty.png" },
   { "id": "snow_white",                  "name": "Snow White",                  "rarity": "legendary", "img": "cards/snow_white.png" },
-  { "id": "three_not_so_little_pigs",    "name": "Three Not So Little Pigs",    "rarity": "legendary", "img": "cards/three_not_so_little_pigs.png", "spawns":_["not_so_little_pig"] },
+  { "id": "three_not_so_little_pigs",    "name": "Three Not So Little Pigs",    "rarity": "legendary", "img": "cards/three_not_so_little_pigs.png", "spawns": ["not_so_little_pig"] },
   { "id": "not_so_little_pig",    "name": "Not So Little Pig",    "rarity": "regular", "img": "cards/not_so_little_pig.png" },
   { "id": "bandersnatch",                "name": "Bandersnatch",                "rarity": "regular", "img": "cards/bandersnatch.png" },
   { "id": "the_kraken",                  "name": "The Kraken",                  "rarity": "regular", "img": "cards/the_kraken.png" },
