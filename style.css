@@ -1,107 +1,45 @@
-/* ─────────────────────────────────────────────
-   1.  Global variables
-   ───────────────────────────────────────────── */
-:root {
-  --pool-card-size: 160px;
-  --deck-card-size: 120px;
-  --gap: 0.6rem;
+:root{
+  --pool-card:160px;
+  --deck-card:120px;
+  --gap:.6rem;
 }
 
-/* ─────────────────────────────────────────────
-   2.  Headline + tagline
-   ───────────────────────────────────────────── */
-.title {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  margin: 0 0 1rem 0;
-}
-.tagline {
-  font-size: 0.55em;
-  font-weight: 400;
-  color: #666;
-}
+/* title + tagline */
+.title{display:flex;align-items:baseline;gap:.75rem;margin:0 0 1rem}
+.tagline{font-size:.55em;color:#666;font-weight:400}
 
-/* ─────────────────────────────────────────────
-   3.  Two-column layout
-   ───────────────────────────────────────────── */
-.layout {
-  display: flex;
-  gap: var(--gap);
+/* layout */
+.layout{display:flex;gap:var(--gap)}
+.pool{
+  flex:1;height:calc(100vh - 5rem);overflow-y:auto;
+  display:grid;grid-template-columns:repeat(auto-fill,var(--pool-card));gap:var(--gap)
 }
-
-/* LEFT ▸ card pool -------------------------------------------------------- */
-.pool {
-  flex: 1;
-  height: calc(100vh - 5rem);
-  overflow-y: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, var(--pool-card-size));
-  gap: var(--gap);
+#deckPanel{
+  width:calc(var(--deck-card)*4 + var(--gap)*3);
+  max-height:100vh;position:sticky;top:0;
+  padding:.5rem;background:#fff;border-left:1px solid #ccc;overflow-y:auto
 }
+#deckPanel h2{margin:0 0 .5rem}
 
-/* RIGHT ▸ deck panel ------------------------------------------------------ */
-#deckPanel {
-  width: calc(var(--deck-card-size) * 4 + var(--gap) * 3);
-  max-height: 100vh;
-  position: sticky;
-  top: 0;
-  padding: 0.5rem;
-  background: #fff;
-  border-left: 1px solid #ccc;
-  overflow-y: auto;
+/* deck grid */
+.deck-grid{
+  display:grid;grid-template-columns:repeat(4,var(--deck-card));gap:var(--gap)
 }
-#deckPanel h2 { margin: 0 0 0.5rem 0; }
+#deckPanel .card.legendary{grid-column:1 / -1}
 
-/* deck grid --------------------------------------------------------------- */
-.deck-grid {
-  display: grid;
-  grid-template-columns: repeat(4, var(--deck-card-size));
-  gap: var(--gap);
+/* card visuals */
+.card{
+  cursor:pointer;border:2px solid transparent;border-radius:6px;
+  transition:transform .15s ease-in-out
 }
-#deckPanel .card.legendary { grid-column: 1 / -1; }
+.pool  .card{width:var(--pool-card)}
+#deckPanel .card{width:var(--deck-card)}
+.card img{width:100%;display:block}
 
-/* ─────────────────────────────────────────────
-   4.  Card tiles
-   ───────────────────────────────────────────── */
-.card {
-  cursor: pointer;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  transition: transform 0.15s ease-in-out;
-}
-.pool  .card { width: var(--pool-card-size);  }
-#deckPanel .card { width: var(--deck-card-size); }
+.card.regular:hover   {border-color:#00e;       transform:scale(1.05)}
+.card.legendary       {box-shadow:0 0 8px #e0a300}
+.card.legendary:hover {border-color:#e0a300;    transform:scale(1.05)}
+.card.summon          {border-color:#d00}       /* red */
 
-.card img { width: 100%; display: block; }
-
-.card.regular:hover   { border-color: #00e;       transform: scale(1.05); }
-.card.legendary       { box-shadow: 0 0 8px #e0a300; }
-.card.legendary:hover { border-color: #e0a300;    transform: scale(1.05); }
-
-/* ─────────────────────────────────────────────
-   5.  Tooltip preview
-   ───────────────────────────────────────────── */
-#tooltip {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  background: #fff;
-  border: 1px solid #aaa;
-  padding: 0.4rem;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-}
-#tooltip img {
-  width: 140px;
-  margin: 0.25rem;
-}
-
-/* ─────────────────────────────────────────────
-   6.  Export button
-   ───────────────────────────────────────────── */
-#export {
-  margin-top: 0.75rem;
-  padding: 0.5rem 0.75rem;
-  cursor: pointer;
-}
+/* export button */
+#export{margin-top:.75rem;padding:.5rem .75rem;cursor:pointer}
