@@ -16,9 +16,8 @@
   gap: 0.75rem;
   margin: 0 0 1rem 0;
 }
-
 .tagline {
-  font-size: 0.55em;        /* smaller text */
+  font-size: 0.55em;
   font-weight: 400;
   color: #666;
 }
@@ -52,7 +51,6 @@
   border-left: 1px solid #ccc;
   overflow-y: auto;
 }
-
 #deckPanel h2 { margin: 0 0 0.5rem 0; }
 
 /* deck grid --------------------------------------------------------------- */
@@ -61,7 +59,6 @@
   grid-template-columns: repeat(4, var(--deck-card-size));
   gap: var(--gap);
 }
-
 #deckPanel .card.legendary { grid-column: 1 / -1; }
 
 /* ─────────────────────────────────────────────
@@ -73,7 +70,6 @@
   border-radius: 6px;
   transition: transform 0.15s ease-in-out;
 }
-
 .pool  .card { width: var(--pool-card-size);  }
 #deckPanel .card { width: var(--deck-card-size); }
 
@@ -84,7 +80,25 @@
 .card.legendary:hover { border-color: #e0a300;    transform: scale(1.05); }
 
 /* ─────────────────────────────────────────────
-   5.  Export button
+   5.  Tooltip preview
+   ───────────────────────────────────────────── */
+#tooltip {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  background: #fff;
+  border: 1px solid #aaa;
+  padding: 0.4rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+#tooltip img {
+  width: 140px;
+  margin: 0.25rem;
+}
+
+/* ─────────────────────────────────────────────
+   6.  Export button
    ───────────────────────────────────────────── */
 #export {
   margin-top: 0.75rem;

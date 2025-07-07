@@ -7,10 +7,10 @@
 </head>
 
 <body>
-  <!-- headline + small tagline -->
+  <!-- headline + tagline -->
   <h1 class="title">
     Project O Deck Builder
-    <span class="tagline">(this is not an official Project O product and for entertainment purposes only, cards may or may not be up-to-date)</span>
+    <span class="tagline">beta&nbsp;v0.1</span>
   </h1>
 
   <div class="layout">
@@ -20,12 +20,13 @@
     <!-- RIGHT ▸ sticky deck panel -->
     <aside id="deckPanel">
       <h2>Your deck (<span id="count">0</span>/13)</h2>
-
       <section id="deck" class="deck-grid"></section>
-
       <button id="export">Save deck as picture</button>
     </aside>
   </div>
+
+  <!-- hover preview -->
+  <div id="tooltip"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="app.js"></script>
